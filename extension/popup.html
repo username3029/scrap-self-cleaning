@@ -8,7 +8,7 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-      width: 280px;
+      width: 300px;
       padding: 16px;
       background: #1a1a2e;
       color: #e0e0e0;
@@ -52,14 +52,69 @@
       font-size: 12px;
       color: #a0a0b0;
       line-height: 1.5;
+      margin-bottom: 12px;
     }
     .info strong { color: #e0e0e0; }
-    hr { border: none; border-top: 1px solid #2a2a4e; margin: 12px 0; }
-    .note {
-      font-size: 11px;
-      color: #707080;
-      text-align: center;
+
+    /* Toggle switch */
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      background: #16213e;
+      border-radius: 8px;
+      margin-bottom: 12px;
     }
+    .toggle-label {
+      font-size: 13px;
+      line-height: 1.4;
+    }
+    .toggle-label small {
+      display: block;
+      color: #a0a0b0;
+      font-size: 11px;
+      margin-top: 2px;
+    }
+    .toggle {
+      position: relative;
+      width: 44px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .toggle .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: #3a3a5a;
+      border-radius: 12px;
+      transition: 0.3s;
+    }
+    .toggle .slider:before {
+      content: "";
+      position: absolute;
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background: #e0e0e0;
+      border-radius: 50%;
+      transition: 0.3s;
+    }
+    .toggle input:checked + .slider {
+      background: #e74c3c;
+    }
+    .toggle input:checked + .slider:before {
+      transform: translateX(20px);
+    }
+
+    hr { border: none; border-top: 1px solid #2a2a4e; margin: 12px 0; }
+    .note { font-size: 11px; color: #707080; text-align: center; }
   </style>
 </head>
 <body>
@@ -67,19 +122,44 @@
     <div class="logo">♻</div>
     <h1>Scrap</h1>
   </div>
+
   <div class="status">
     <span class="dot"></span>
     <span>Extension active</span>
   </div>
-  <div class="info">
-    <strong>Right-click</strong> any download link, video, or audio, then select<br />
-    <strong>"Download to Scrap"</strong>
-    to route the file directly into your Scrap folder.
+
+  <div class="toggle-row">
+    <div class="toggle-label">
+      Auto-route all downloads to Scrap
+      <small>When ON, every download goes to Scrap folder</small>
+    </div>
+    <label class="toggle">
+      <input type="checkbox" id="autoRouteToggle" />
+      <span class="slider"></span>
+    </label>
   </div>
+
+  <div class="info">
+    <strong>Right-click</strong> any link, image, video, or audio, then select<br />
+    <strong>"Download to Scrap"</strong> to route the file directly into your Scrap folder.
+  </div>
+
   <hr />
   <div class="note">
     Scrap deletes files after 24 hours.<br />
     Move important files out to keep them safe.
   </div>
+
+  <script>
+    // Load saved state
+    chrome.storage.local.get(["autoRoute"], (data) => {
+      document.getElementById("autoRouteToggle").checked = !!data.autoRoute;
+    });
+
+    // Save state on toggle
+    document.getElementById("autoRouteToggle").addEventListener("change", (e) => {
+      chrome.storage.local.set({ autoRoute: e.target.checked });
+    });
+  </script>
 </body>
 </html>
