@@ -1,5 +1,11 @@
 // Scrap - Download to Scrap
 const SCRAP = "Scrap";
+let autoRoute = false;
+
+// Load saved state on startup
+chrome.storage.local.get(["autoRoute"], (data) => {
+  autoRoute = !!data.autoRoute;
+});
 
 // Create right-click menu
 chrome.runtime.onInstalled.addListener(() => {
@@ -8,8 +14,14 @@ chrome.runtime.onInstalled.addListener(() => {
     title: "Download to Scrap",
     contexts: ["link", "image", "video", "audio", "page", "selection"]
   });
-  // Set default: auto-route is OFF
   chrome.storage.local.set({ autoRoute: false });
+});
+
+// Listen for state changes from popup
+chrome.storage.onChanged.addListener((changes) => {
+  if (changes.autoRoute) {
+    autoRoute = changes.autoRoute.newValue;
+  }
 });
 
 // Right-click handler
@@ -26,15 +38,12 @@ chrome.contextMenus.onClicked.addListener((info) => {
 });
 
 // Auto-route: intercept ALL downloads and send to Scrap if enabled
+// Note: suggest() must be called synchronously, no async callbacks
 chrome.downloads.onDeterminingFilename.addListener((downloadItem, suggest) => {
-  chrome.storage.local.get(["autoRoute"], (data) => {
-    if (data.autoRoute) {
-      // Extract filename from URL or use downloadItem's suggested filename
-      let filename = downloadItem.filename || downloadItem.url.split("/").pop() || "download";
-      suggest({ filename: SCRAP + "/" + filename, conflictAction: "uniquify" });
-    } else {
-      // Let it download normally
-      suggest();
-    }
-  });
+  if (autoRoute) {
+    let name = downloadItem.filename || downloadItem.url.split("/").pop() || "download";
+    suggest({ filename: SCRAP + "/" + name, conflictAction: "uniquify" });
+  } else {
+    suggest();
+  }
 });
