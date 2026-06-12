@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Scrap – Download to Scrap",
+  "version": "1.0.0",
+  "description": "Right-click any download link and route it directly to your Scrap folder.",
+  "permissions": ["contextMenus", "downloads", "storage"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Scrap",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icon-16.png",
+    "48": "icon-48.png",
+    "128": "icon-128.png"
+  }
+}

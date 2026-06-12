@@ -1,0 +1,1 @@
+"""Scrap – Self-Cleaning Downloads Folder."""

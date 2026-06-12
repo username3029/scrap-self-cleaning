@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to Scrap</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="onboarding-container">
+    <!-- Slide 1: Welcome -->
+    <div class="slide active" data-slide="0">
+      <div class="slide-content">
+        <div class="icon-large">♻</div>
+        <h1>Welcome to <span class="highlight">Scrap</span></h1>
+        <p class="subtitle">The self-cleaning Downloads folder you've always wanted.</p>
+        <p class="desc">
+          Scrap creates a special folder called <strong>Scrap</strong> inside your
+          Downloads. Every file you put there is automatically <strong>permanently
+          deleted after 24 hours</strong>.
+        </p>
+        <button class="btn-primary" onclick="nextSlide()">Get Started →</button>
+      </div>
+    </div>
+
+    <!-- Slide 2: How It Works -->
+    <div class="slide" data-slide="1">
+      <div class="slide-content">
+        <div class="icon-large">⚙️</div>
+        <h2>How It Works</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-text">
+              <strong>Right-click</strong> any download link in your browser
+              and select <em>"Download to Scrap"</em>.
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-text">
+              The file lands in <strong>~/Downloads/Scrap</strong>.
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-text">
+              <strong>Move important files out</strong> of Scrap within 24 hours.
+              Everything else is <strong>permanently deleted</strong>.
+            </div>
+          </div>
+        </div>
+        <div class="btn-group">
+          <button class="btn-secondary" onclick="prevSlide()">← Back</button>
+          <button class="btn-primary" onclick="nextSlide()">Next →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3: Install Desktop App -->
+    <div class="slide" data-slide="2">
+      <div class="slide-content">
+        <div class="icon-large">🖥️</div>
+        <h2>Step 1: Desktop App</h2>
+        <p class="desc">
+          The Scrap desktop app runs in your system tray, monitors the folder,
+          and automatically deletes old files.
+        </p>
+        <div class="code-block">
+          <p>Install dependencies:</p>
+          <code>cd scrap && pip install -r requirements.txt</code>
+          <p>Then run:</p>
+          <code>python -m desktop_app.tray_app</code>
+        </div>
+        <div class="checkbox-line">
+          <input type="checkbox" id="step1-done" />
+          <label for="step1-done">I've installed & started the desktop app</label>
+        </div>
+        <div class="btn-group">
+          <button class="btn-secondary" onclick="prevSlide()">← Back</button>
+          <button class="btn-primary" onclick="nextSlide()">Next →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4: Install Extension -->
+    <div class="slide" data-slide="3">
+      <div class="slide-content">
+        <div class="icon-large">🧩</div>
+        <h2>Step 2: Browser Extension</h2>
+        <p class="desc">
+          Install the Scrap extension to right-click and download directly
+          into your Scrap folder.
+        </p>
+        <div class="extension-steps">
+          <p>1. Open <strong>chrome://extensions</strong></p>
+          <p>2. Enable <strong>Developer mode</strong> (top-right)</p>
+          <p>3. Click <strong>Load unpacked</strong></p>
+          <p>4. Select the <code>scrap/extension</code> folder</p>
+        </div>
+        <div class="checkbox-line">
+          <input type="checkbox" id="step2-done" />
+          <label for="step2-done">I've installed the extension</label>
+        </div>
+        <div class="btn-group">
+          <button class="btn-secondary" onclick="prevSlide()">← Back</button>
+          <button class="btn-primary" onclick="nextSlide()">Next →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 5: You're All Set -->
+    <div class="slide" data-slide="4">
+      <div class="slide-content">
+        <div class="icon-large">🎉</div>
+        <h2>You're All Set!</h2>
+        <p class="desc">
+          Scrap is now running. Any file you download to Scrap will be
+          <strong>permanently deleted after 24 hours</strong>.
+        </p>
+        <p class="tip">
+          💡 <strong>Pro tip:</strong> Keep the Scrap folder pinned in your
+          file manager for easy access.
+        </p>
+        <div class="btn-group">
+          <button class="btn-secondary" onclick="prevSlide()">← Back</button>
+          <button class="btn-primary" onclick="closeOnboarding()">Finish</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide indicators -->
+    <div class="dots">
+      <span class="dot active" data-dot="0"></span>
+      <span class="dot" data-dot="1"></span>
+      <span class="dot" data-dot="2"></span>
+      <span class="dot" data-dot="3"></span>
+      <span class="dot" data-dot="4"></span>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
