@@ -1,16 +1,10 @@
 {
   "manifest_version": 3,
   "name": "Scrap - Download to Scrap",
-  "version": "1.1.0",
-  "description": "Right-click and download files directly to your Scrap folder.",
-  "permissions": [
-    "contextMenus",
-    "downloads",
-    "storage"
-  ],
-  "host_permissions": [
-    "<all_urls>"
-  ],
+  "version": "2.0.0",
+  "description": "Right-click any link and download directly to your Scrap folder.",
+  "permissions": ["contextMenus", "downloads"],
+  "host_permissions": ["<all_urls>"],
   "background": {
     "service_worker": "background.js"
   },
