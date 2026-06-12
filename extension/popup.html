@@ -152,13 +152,12 @@
 
   <script>
     // Load saved state
-    chrome.storage.local.get(["autoRoute"], (data) => {
-      document.getElementById("autoRouteToggle").checked = !!data.autoRoute;
+    chrome.storage.local.get(["routeToScrap"], (data) => {
+      document.getElementById("autoRouteToggle").checked = !!data.routeToScrap;
     });
 
-    // Save state on toggle
     document.getElementById("autoRouteToggle").addEventListener("change", (e) => {
-      chrome.storage.local.set({ autoRoute: e.target.checked });
+      chrome.storage.local.set({ routeToScrap: e.target.checked });
     });
   </script>
 </body>
